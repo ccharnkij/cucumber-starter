@@ -13,10 +13,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <serenity.version>2.2.7</serenity.version>
         <serenity.maven.version>2.2.7</serenity.maven.version>
-        <serenity.cucumber.version>2.2.2</serenity.cucumber.version>
+        <serenity.cucumber.version>2.2.5</serenity.cucumber.version>
         <encoding>UTF-8</encoding>
         <tags></tags>
-        <parallel.tests>4</parallel.tests>
+        <parallel.tests>2</parallel.tests>
         <webdriver.base.url></webdriver.base.url>
     </properties>
 
@@ -119,26 +119,31 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0-M4</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/Test*.java</include>
-                        <include>**/*TestSuite.java</include>
-                        <include>**/When*.java</include>
-                    </includes>
-                    <systemPropertyVariables>
-                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                    </systemPropertyVariables>
-                    <parallel>classes</parallel>
-                    <threadCount>${parallel.tests}</threadCount>
-                    <forkCount>${parallel.tests}</forkCount>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
+
+                        <configuration>
+                            <includes>
+                                <include>**/*CucumberTestSuite.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+
+                                <serenity.batch.count>0${parallel.tests}</serenity.batch.count>
+                                <serenity.batch.number>0${surefire.forkNumber}</serenity.batch.number>
+                            </systemPropertyVariables>
+
+                            <threadCount>${parallel.tests}</threadCount>
+                            <forkCount>${parallel.tests}</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <parallel>methods</parallel>
+
+                        </configuration>
+
                     </execution>
                 </executions>
             </plugin>

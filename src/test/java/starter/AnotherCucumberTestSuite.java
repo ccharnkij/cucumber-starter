@@ -10,4 +10,4 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         strict = true
 )
-public class CucumberTestSuite {}
+public class AnotherCucumberTestSuite {}

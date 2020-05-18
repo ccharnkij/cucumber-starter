@@ -19,8 +19,13 @@ public class SearchStepDefinitions {
         OnStage.setTheStage(new OnlineCast());
     }
 
-    @Given("{actor} is researching things on the internet")
-    public void researchingThings(Actor actor) {
+    @Given("{actor} is researching things on the {string}")
+    public void researchingThings(Actor actor, String category) {
+        actor.wasAbleTo(NavigateTo.theWikipediaHomePage());
+    }
+
+    @Given("{actor} is creating things about the {string}")
+    public void creatingThings(Actor actor, String category) {
         actor.wasAbleTo(NavigateTo.theWikipediaHomePage());
     }
 
